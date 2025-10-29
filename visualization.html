@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>空气质量数据可视化系统</title>
+    <link rel="stylesheet" href="visualization.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div id="header">
+        <h1>中国空气质量数据可视化分析系统</h1>
+        <div id="controls">
+            <div class="control-group">
+                <label>时间范围:</label>
+                <select id="month-selector">
+                    <option value="201301">2013年1月</option>
+                    <option value="201302">2013年2月</option>
+                    <option value="201312">2013年12月</option>
+                    <option value="201401">2014年1月</option>
+                    <option value="201601">2016年1月</option>
+                    <option value="201612">2016年12月</option>
+                    <option value="201701">2017年1月</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>污染物类型:</label>
+                <select id="pollutant-selector">
+                    <option value="pm25">PM2.5</option>
+                    <option value="pm10">PM10</option>
+                    <option value="so2">SO₂</option>
+                    <option value="no2">NO₂</option>
+                    <option value="co">CO</option>
+                    <option value="o3">O₃</option>
+                </select>
+            </div>
+            <button id="load-button">加载数据</button>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <!-- 左侧：地图视图 -->
+        <div id="map-container">
+            <div id="map"></div>
+            <div id="map-legend"></div>
+        </div>
+
+        <!-- 右侧：统计信息 -->
+        <div id="info-panel">
+            <h2>数据概览</h2>
+            <div id="stats"></div>
+            <div id="loading" class="hidden">正在加载数据...</div>
+        </div>
+    </div>
+
+    <!-- 后续可添加更多视图容器 -->
+    <div id="footer">
+        <p>数据来源: 中国大气污染再分析数据集 2013-2017</p>
+    </div>
+
+    <script src="visualization.js"></script>
+</body>
+</html>
+

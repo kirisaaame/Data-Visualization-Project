@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国空气质量数据可视化系统</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>中国空气质量数据可视化分析系统 (2013-2017)</h1>
+        <p class="subtitle">基于D3.js + Babylon.js的多视图联动可视化平台</p>
+    </div>
+
+    <div class="main-container">
+        <!-- 左侧：控制面板 -->
+        <div class="sidebar">
+            <div class="control-panel">
+                <h2>控制面板</h2>
+                
+                <div class="control-section">
+                    <h3>时间控制</h3>
+                    <label>选择日期：</label>
+                    <select id="date-selector">
+                        <!-- 动态生成选项 -->
+                    </select>
+                    <label style="margin-top: 10px; display: block;">时间序列天数：</label>
+                    <select id="timeseries-days">
+                        <option value="7">7天</option>
+                        <option value="30" selected>30天</option>
+                        <option value="90">90天</option>
+                    </select>
+                    <button id="animate-btn" class="btn">播放动画</button>
+                    <button id="stop-btn" class="btn">停止动画</button>
+                    <p style="font-size: 11px; color: #999; margin-top: 5px;">
+                        支持选择2013-2017年的每一天
+                    </p>
+                </div>
+
+                <div class="control-section">
+                    <h3>污染物类型</h3>
+                    <select id="pollutant-selector">
+                        <option value="PM2.5">PM2.5</option>
+                        <option value="PM10">PM10</option>
+                        <option value="SO2">SO₂</option>
+                        <option value="NO2">NO₂</option>
+                        <option value="CO">CO</option>
+                        <option value="O3">O₃</option>
+                    </select>
+                </div>
+
+                <div class="control-section">
+                    <h3>视图选择</h3>
+                    <label>
+                        <input type="checkbox" id="show-map" checked> 地图视图
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-timeseries" checked> 时间序列
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-windfield"> 风场3D
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-correlation"> 相关性分析
+                    </label>
+                </div>
+            </div>
+
+            <div class="info-panel" id="info-panel">
+                <h3>数据统计</h3>
+                <div id="stats-content">
+                    <p>请加载数据</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="content-area">
+            <!-- 地图视图 -->
+            <div class="view-container" id="map-view">
+                <h2>污染物分布地图</h2>
+                <div id="map-canvas"></div>
+                <div id="map-legend"></div>
+            </div>
+
+            <!-- 时间序列视图 -->
+            <div class="view-container" id="timeseries-view">
+                <h2>时间序列分析</h2>
+                <div id="timeseries-canvas"></div>
+            </div>
+
+            <!-- 风场视图 -->
+            <div class="view-container" id="windfield-view" style="display: none;">
+                <h2>风场向量可视化</h2>
+                <div id="windfield-canvas"></div>
+            </div>
+
+            <!-- 相关性分析视图 -->
+            <div class="view-container" id="correlation-view" style="display: none;">
+                <h2>相关性分析</h2>
+                <div id="correlation-canvas"></div>
+            </div>
+
+            <!-- 顶部加载状态条 -->
+            <div id="loading-bar" class="hidden">
+                <div class="spinner-small"></div>
+                <span id="loading-text">正在加载数据...</span>
+                <span id="loading-progress"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载主应用模块 -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

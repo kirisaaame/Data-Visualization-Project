@@ -1,0 +1,334 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'SimHei', Arial, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 120px);
+    gap: 20px;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.control-panel h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #667eea;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.control-section {
+    margin-bottom: 25px;
+}
+
+.control-section h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.control-section label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.control-section select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    background: white;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.control-section select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background: #5568d3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.control-section input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.content-area {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.view-container {
+    margin-bottom: 30px;
+}
+
+.view-container h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#map-canvas,
+#timeseries-canvas,
+#correlation-canvas {
+    min-height: 600px;
+}
+
+#map-canvas canvas {
+    display: block;
+}
+
+#timeseries-canvas svg,
+#correlation-canvas svg {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #1a1a2e;
+}
+
+#timeseries-canvas svg .grid line {
+    stroke: #666;
+    opacity: 0.3;
+}
+
+#timeseries-canvas svg .axis {
+    fill: white;
+    color: white;
+}
+
+#timeseries-canvas svg .axis line,
+#timeseries-canvas svg .axis path {
+    stroke: #666;
+}
+
+#windfield-canvas {
+    width: 100%;
+    min-height: 600px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #1a1a2e;
+    display: block;
+}
+
+#windfield-canvas canvas {
+    display: block;
+}
+
+#correlation-canvas {
+    width: 100%;
+    min-height: 600px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #1a1a2e;
+    display: block;
+}
+
+#correlation-canvas svg {
+    background: #1a1a2e;
+}
+
+.info-panel {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.info-panel h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+}
+
+.stat-label {
+    color: #666;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #333;
+}
+
+#loading-bar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 26, 46, 0.95);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+#loading-bar.hidden {
+    display: none;
+}
+
+.spinner-small {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#loading-text {
+    font-weight: 500;
+}
+
+#loading-progress {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-left: auto;
+}
+
+.loading-text {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #999;
+}
+
+#map-canvas canvas,
+#windfield-canvas {
+    cursor: crosshair;
+}
+
+.view-container {
+    position: relative;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* 工具提示样式 */
+.tooltip {
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.tooltip strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
